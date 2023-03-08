@@ -17,11 +17,11 @@ const emailReducer = (state , action) =>{
 }
 
 const passwordReducer = (state , action) =>{
-  if(action.type ==='USER_INPUT'){
-    return {value:action.val, isValid:action.val};
+  if(action.type ==='USER_INPUT1'){
+    return {value:action.val, isValid:action.val.trim().length>6};
   }
-  if(action.type ==='INPUT_BLUR'){
-    return {value :state.value, isValid:state.value};
+  if(action.type ==='INPUT_BLUR1'){
+    return {value :state.value, isValid:state.value.trim().length>6};
   }
   return {value :'',isValid:false}
 }
@@ -39,10 +39,10 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [emailState , dispatchEmail] = useReducer(emailReducer , 
-    {value :'',isValid:false});
+    {value :'',isValid:null});
 
     const [passwordState , dispatchPassword] = useReducer(passwordReducer , 
-      {value :'',isValid:false});
+      {value :'',isValid:null});
 
   // useEffect(() =>{
   //   setFormIsValid(
@@ -65,7 +65,7 @@ const Login = (props) => {
 
   const passwordChangeHandler = (event) => {
     // setEnteredPassword(event.target.value);
-    dispatchPassword({type:'USER_INPUT', val:event.target.value})
+    dispatchPassword({type:'USER_INPUT1', val:event.target.value})
 
     setFormIsValid(
       emailState.isValid && 
@@ -91,7 +91,7 @@ const Login = (props) => {
 
   const validatePasswordHandler = () => {
     // setPasswordIsValid(enteredPassword.trim().length > 6);
-    dispatchPassword({type:'INPUT_BLUR'})
+    dispatchPassword({type:'INPUT_BLUR1'})
   };
 
   const validateCollegeHandler = () => {
