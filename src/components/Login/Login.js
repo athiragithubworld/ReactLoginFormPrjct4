@@ -3,6 +3,7 @@ import React, { useState , useEffect , useReducer } from 'react';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import Input from '../Input/Input';
 
 
 
@@ -110,36 +111,40 @@ const Login = (props) => {
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            emailState.isValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
+        <Input 
+            label="E-Mail"
             id="email"
+            type="email"
+            isValid={emailIsValid}
             value={emailState.value}
             onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
-          />
-        </div>
-        <div
-          className={`${classes.control} ${
-            passwordState.isValid === false ? classes.invalid : '' //passwordIsValid
-          }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
+            onBlur={validateEmailHandler} 
+        />
+        <Input
+            label="Password"
             id="password"
+            type="password"
+            isValid={passwordIsValid}
             value={passwordState.value}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
-          />
-        </div>
 
-        <div
+            
+        />
+        <Input
+            label="College"
+            id="college"
+            type="college"
+            isValid={collegeIsValid}
+            value={enteredCollege}
+            onChange={collegeChangeHandler}
+            onBlur={validateCollegeHandler}
+        />
+
+
+
+{/* ------------------------------  old way ----------------------------- */}
+        {/* <div
           className={`${classes.control} ${
             collegeIsValid === false ? classes.invalid : ''
           }`}
@@ -152,8 +157,8 @@ const Login = (props) => {
             onChange={collegeChangeHandler}
             onBlur={validateCollegeHandler}
           />
-        </div>
-
+        </div> */}
+{/* ----------------------------------------------------------------------- */}
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
